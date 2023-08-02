@@ -1,4 +1,6 @@
-// TypeScript notes 
+# TypeScript
+
+```ts
 /*
     Data Types
     Unions
@@ -46,3 +48,4 @@ sum(2,3);
 
 
 // 
+```

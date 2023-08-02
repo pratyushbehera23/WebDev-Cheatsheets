@@ -1,3 +1,5 @@
+# HTML
+
 <!-- Notes
     HTML CHEATSHEET
         Basic HTML Tags
@@ -101,7 +103,6 @@
             - Comments are not displayed in the browsers
             - use comments to explain your code
             - very helpful in code maintainance
-
 
 >   HTML TEXT FORMATTING & QUOTATION
         <b> ... </b>
@@ -508,6 +509,8 @@
 -->
 
 <!-- index.html -->
+
+```html
 
 <!DOCTYPE html>
 <html lang="en" oncontextmenu="return false">
@@ -1082,3 +1085,4 @@
 
 </body>
 </html>
+```
