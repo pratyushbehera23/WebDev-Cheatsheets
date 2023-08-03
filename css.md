@@ -1,5 +1,9 @@
 # CSS
 
+HTML elements have their default styles, which can be changed using CSS styling
+
+CSS can be written: Inline | Internal </style> | External style.css
+
 ## CSS CHEATSHEET
 
 - Basics
@@ -16,26 +20,42 @@
 ## Basics
 
 CSS types :
-    inline(inside html tags), internal(< /style >) / external(.css)
+    inline(inside html tags), internal(</style>) / external(.css)
 
-CSS Format :
+CSS Format:
     selector{
         property: value;
-        property: value;
+        property: value unit;
     }
 
-Selector types :
-    elementName(div/h1/p/span/...)
-    .class #id
+Selector types:
+    element (div/h1/p/span/...)
+    .class
+    #id
 
-CSS priority order :
-    inline > latest value of same property (bottom most) in internal/external CSS.
-    id > class > element
+Selector specificity (priority):
+    Declarations marked (!important)  >  Inline style  >  ID(#)  >  Class(.)  >  Element(p,div,..)  >  Universal(*)
+    Also, in internal/external CSS latest value of same property (bottom most) applies.
+
+Selectors:
+    Descendant (space) -
+    (,) -
+    (>) -
+    Adjacent/Sibling (+) -
+
+parent > *{}
+
+Value: It can be a number value / meaningful word or code (some with units)
+    inherit
+    initial
+    unset
+    ...
 
 CSS units:
     Pixel px - Represents pixel on a device
     Points pt - 72 points = 1 inch
     Ems - 1em = current font size
+    rem - root em
     Percent % - full is 100%
 
 <!-- ```txt -->

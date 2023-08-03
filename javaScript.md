@@ -1,9 +1,23 @@
 # JS
 
-JavaScript abbreviated as JS is a high level Object Oriented Progamming language. This language used in development of frontEnd as well as in the backEnd of website.
-    • JavaScript works like the brain of a website.
-    • There are so many libraries of JavaScript which makes the code shorter like jQuery and some frameworks of the javascript are React JS and Anuglar JS.
-    • Javascript is one of the Languages which is compalsury to learn for a Web-Developer
+JavaScript abbreviated as JS is a high level Object Oriented Progamming language.
+This language used in development of frontEnd as well as in the backEnd of website.
+
+- JavaScript works like the brain of a website.
+- There are so many libraries of JavaScript which makes the code shorter like jQuery and some frameworks of javascript that help building web-apps faster like ReactJs, AnuglarJs, VueJs.
+- Javascript is one of the Languages which is compalsury to learn for a Web-Developers.
+
+JavaScript is used in all popular browsers and standardized by ECMA as EcmaScript versions.
+ECMA - org that defines standards
+ECMAscript - specification  ex: ES6
+JavaScript - lang that confirms to this specification
+
+Using JS we can build: WebApp Games Command-line-tools Real-time-networking like chats
+
+JS was created only for browsers, to work inside browser engines like: Chrome v8, Firefox spidermonkey, etc.
+Later, found a way to run it outside browsers like in PC and servers. ex: Node, Deno, etc.
+Node = (v8 engine) + (C++ program) - it makes JS run outside browser.
+So, JS can be run inside a browser or in Node as they provide a runtime environment for JS code.
 
 ## Basis
 
