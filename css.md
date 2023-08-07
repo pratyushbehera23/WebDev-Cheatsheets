@@ -4,65 +4,312 @@ HTML elements have their default styles, which can be changed using CSS styling
 
 CSS can be written: Inline | Internal </style> | External style.css
 
-## CSS CHEATSHEET
+## CSS CheatSheet
 
-- Basics
-- Font, Text, Background, Color
+- Basic format
+- CSS selectors & units
 - The Box Model
-- Column, animation, Transition
-- Pseudo-classes and element,
-- units of measurement
-- Position, Outliine, List,
-- Transform
-- Semantic tags, Tables, Lists & Images
-- CSS Grid, Flexbox 8
+- CSS properties: Font, Text, Background, Color, Column, animation, Transition, Position, Outline, List, Transform
+- CSS Layouts: Floats Flexbox Grid
 
 ## Basics
 
-CSS types :
-    inline(inside html tags), internal(</style>) / external(.css)
+Ways to put CSS:
+
+- inline(inside html tags)
+- internal(</style>) / external(.css)
 
 CSS Format:
-    selector{
-        property: value;
-        property: value unit;
-    }
 
-Selector types:
-    element (div/h1/p/span/...)
-    .class
-    #id
+```css
+selector{
+    property: value;
+    property: value unit;
+}
+```
 
-Selector specificity (priority):
-    Declarations marked (!important)  >  Inline style  >  ID(#)  >  Class(.)  >  Element(p,div,..)  >  Universal(*)
-    Also, in internal/external CSS latest value of same property (bottom most) applies.
+- Selector: selects the HTML elements you want to style.
+- Property: a style or function for HTML elements.
+- Value: a number value (with units) / word value / code / defaults (inherit, initial, unset, ..)
 
-Selectors:
-    Descendant (space) -
-    (,) -
-    (>) -
-    Adjacent/Sibling (+) -
+## CSS Selectors
 
-parent > *{}
+Used to "find" (or select) the HTML elements you want to style.
 
-Value: It can be a number value / meaningful word or code (some with units)
-    inherit
-    initial
-    unset
-    ...
+Categories of selectors:
+
+- Simple
+  - element (div/h1/p/span/...)
+  - .class
+  - #id
+- combinator
+- Pseudo
+  - Pseudo-class
+  - pseudo-element
+- attribute
+
+> Selector specificity (priority): Declarations marked (!important)  >  Inline style  >  ID(#)  >  Class(.)  >  Element(p,div,..)  >  Universal(*)
+
+Also, in internal/external CSS latest value of same property (bottom most) applies.
+
+- Universal (\*) - Selects all elements - eg.* {color: red;}
+- Element (h1/p/..) - Select using element name - eg. p {font-size: 18px;}
+- Class (.) - Select single or multiple elements using their class - eg. .button {color: #ffffff}
+- id (#) - Select a sinlge element using its unique id - eg #submit-button {disabled: true}
+- Attribute ([ ]) - Select an element that has a particular attribute - -eg. a[target="_blank"] {color: #00ff00;}
+- Pseudo-class (:) - To Style an element in a particular state. - eg a:hover {background-color: 0000ff;}
+- Pseudo-element (::) - To style specified part of an element - eg. p::first-line {color: ff0000}
+- Multiple elements (,) - to give multiple elements the same styling - eg. h1, p, .button {font-size: 17px;}
+- Child (>) - To style a direct child of an element - eg. .caption > p {color: ff0000}; .parent > *{}
+- Descendant (space) - To style a descendant, could be child or lower - eg. .caption p {color: ff0000}
+- Adjacent/Sibling (+) -
+
+### Pseudo selectors
+
+#### Pseudo-element
+
+pseudo-element(::) is by default inline
+
+::firt-letter & ::first-line - Adds special styling to 1st letter & line of a text
+h1::first-letter{
+    font-size: 80px
+}
+p::first-line{
+    font-weight: bold;
+}
+h3 + p::first-line{
+    font-weight: bold;
+}
+
+::before & ::after - Adds some content before & after an element
+h1::before
+h1::after{
+    content: "";  -> (mandatory) adds extra content (mostly small styles that we dont want in our HTML)
+}
+
+#### Pseudo-class
+
+pseudo-class(:)
+
+##### child
+
+first-child, last-child, nth-child(2), nth-child(even),
+
+li:first-child{
+    color: red;
+}
+article p:first-child{
+    font-weight: bold;
+}
+// if not then apply:
+li:not(:last-child){
+    margin-bottom: 2rem
+}
+
+##### links
+
+// only </a> with href link in it
+a:link{}
+// cursor hovered
+a:hover{}
+// while clicking
+a:active{}
+// visited links
+a:visited{}
+
+nav a:link:last-child{
+    margin-right: 0;
+}
+
+:link & :visited
+    Styles an unvisited link & a visited link
+:focus & :hover
+    An element when with focus & when u mouser over it
+:enabled & :disabled
+    Styles an enabled element & a disabled element
+:checked & :selection
+    A checked form element and a highlighted element
+:first-child, :last-child & :only-child
+    Styles 1st child, last child & only child of an element
+:nth-child(n) & :nth-last-child(n)
+    The nth child & the nth child counting from the end
+:first-of-type, :last-of-type & :only-of-type
+    An element that is 1st, last or only type of its siblings
+:nth-of-type(n) & :nth-last-of-type(n)
+    The nth sibling or nth counting from last of its siblings
+:root
+    Styles an unvisited link & a visited link
+:empty
+    An element when with focus & when u mouser over it
+:active
+    Styles an activated element
+:target
+    Styles the current active target element
+
+## CSS Units
 
 CSS units:
-    Pixel px - Represents pixel on a device
-    Points pt - 72 points = 1 inch
-    Ems - 1em = current font size
-    rem - root em
-    Percent % - full is 100%
 
-<!-- ```txt -->
+- Pixel px - Represents pixel on a device
+- Points pt - 72 points = 1 inch
+- Ems - 1em = current font size
+- rem - root em
+- Percent % - full is 100%
 
-## FONT | TEXT | BACKGROUND | COLOR
+### Absolute Units
 
-### FONT
+Absolute measurement units do not change with changing browser window or device screen size
+
+- Not good for responsiveness. use only when you know what you are doing
+    Centimeter-cm  Millimeter-mm  Inch-in  Point-pt
+
+### Relative Units
+
+Relative measurement units change with changing screen size, pixels, width, etc
+
+- Very good for responsivity. Preferred over absolute units
+    Percentage-%
+        Styles an unvisited link & a visited link
+    Pixel-px
+        An element when with focus & when u mouser over it
+    em
+        Relative to font size of the current element
+    Rootem-rem
+        Relative to font size of root element(mostly < html>)
+    vh & vw
+        Relative to the viewport height(vh) or width(vw)
+    vm
+        Relative to vh or vw, whichever is smaller
+
+### Angles
+
+Degrees-deg  Radians-rad  Grads-grad  Turns-turn
+
+### Frequency
+
+Hertz-Hz  Kilo-Hertz-kHz
+
+### Time
+
+Seconds-s  Milli-seconds-ms
+
+## Box-model
+
+It is essentially a box that wraps around every HTML element.
+
+It consists of:
+
+- the actual _content_ (height, width)
+- _padding_
+- _border_
+- _margin_
+
+-Unless Specified, Value is always a length(px, em, rem, etc) or %
+
+### Content
+
+The content of the box, where text and images appear.
+
+- height & width: Specifies the height & width of content
+- max-height & max-width: Cannot be exceeded by height or width value
+
+- float: Positions elements to far left or right. Values: left, right. Make sure the elements are the only 2 in their div. Float one left & the other right
+- display: Specifies if/how an element is displayed. Values: none, block, inline, inline-block
+
+### Border
+
+A border that goes around the padding and content, not visible until given a width
+
+- Value: border-width, border-style, border-color eg. border: 3px, solid, red; ( in that order)
+- BORDER STYLES: solid, dotted, dashed, double. 3D versions - groove, ridge, inset, outset. none, hidden
+
+Values can also be properties on their own. eg. border-style: 3px; border-top-color: 8px; border-right-style: solid;
+    border-top
+        Specifies only the top border
+        - Same values and same arrangement as border
+    border-right
+        Specifies only the right border
+        - Same values and same arrangement as border
+    border-bottom
+        Specifies only the bottom border
+        - Same values and same arrangement as border
+    border-left
+        Specifies only the left border
+        - Same values and same arrangement as border
+
+### Margin
+
+Used to create space around elements, outside of any defined borders
+
+- Value: margin-top, margin-right, margin-bottom, margin-left - eg. margin: 5px, 10px, 5px, 10px;
+    margin-top
+        Specifies only the top margin
+    margin-right
+        Specifies only the right margin
+    margin-bottom
+        Specifies only the bottom margin
+    margin-left
+        Specifies only the left margin
+    margin- shorthand
+        When only 2 vals are specifed. eg. margin: 5px 10px
+        1st val - margin-top & bottom. 2nd val - margin-right &lft
+    margin-shortest hand
+        When only 1 value is specifed. eg. margin: 5px
+        The value represent all margins
+
+### Padding
+
+Used to generate space around an element's content, inside of any defined borders
+
+- Value: padding-top, padding-right, padding-bottom, padding-left - eg. padding: 5px, 10px, 5px, 10px;
+    padding-top
+        Specifies only the top padding
+    padding-right
+        Specifies only the right padding
+    padding-bottom
+        Specifies only the bottom padding
+    padding-left
+        Specifies only the left padding
+    padding - shorthand
+        When only 2 vals are specifed. eg padding: 5px 10px
+        1st val - padding-top & bottom. 2nd val - padding-right &lft
+    padding - shortest hand
+        When only 1 value is specifed. eg. padding: 5px
+        The value represent all paddings
+
+### Box-sizing property
+
+- content-box (default) : final width/height = content + padding + border
+- border-box : final width/height = content (padding, border gets into it)
+
+```css
+*{
+    box-sizing: border-box;
+}
+```
+
+### Display
+
+Display property specifies the display behaviour of HTML element
+
+- Block - 100% of parent width | box-model applies | ex: body main header footer section nav aside div h1-h6 p ul ol li ...
+- Inline - Content's space | box-model applies | ex: span b strong i em a button
+- Inline-block - Occupies only Content's space (no line breaks) | box-model is different (height, width don't apply | padding, margin only horizontally) | ex: img
+
+### Position
+
+Specifies the type of positioning method used for an element
+Use properties - `top, bottom, right, left` to specify the position after specifying the type of positioning
+
+- Static -
+- Absolute - Relative to it's first positioned ancestor.
+- Relative - Relative to the elements original position.
+- Fixed - Relative to browser window. Fixed to specified location.
+- Sticky - Relative to a scroll position. ie. first relative then become fixed.
+
+## CSS propeties
+
+### Font
 
 The CSS font properties define the font family, boldness, size, and the style of a text
     font-family
@@ -85,7 +332,7 @@ The CSS font properties define the font family, boldness, size, and the style of
         For displaying caps letters with a smaller text size
         -Values: normal, small-caps, inherit
 
-### TEXT
+### Text
 
 text-decoration
     Specifies the decoration added to text
@@ -112,7 +359,20 @@ letter-spacing
     increase/decreases space betwn chars in atext
     - Value: px, em, etc
 
-### BACKGROUND
+```css
+.text{
+    color: (rgb hex hsl hwb + a);
+    font-size: __ px em rem %;
+    font-weight: (400 600 800 bold bolder);
+    font-style: (normal, italic, oblique, ..);
+    font-family: (serif, sans-serif, monospace, ..);
+    text-transform: (uppercase, lowercase, capitalize);
+    line-height: 1(default);
+    letter-spacing: normal (.3rem, 3px, ..);
+}
+```
+
+### Background
 
 Short hand eg - background: lightblue url("img_tree.gif") no-repeat fixed center;
 -Order: background-color, background-image, background-repeat, background-attachment, background-position
@@ -141,94 +401,75 @@ Short hand eg - background: lightblue url("img_tree.gif") no-repeat fixed center
         Specifies the painting area of the bg images
         - Values: border-box-padding-box, content-box
 
-### COLOR
+### Color
 
-Common Hex: White - #ffffff, Black - #000000, Red - #ff0000, Green - #00ff00, Blue - #0000ff....See the pattern?
-Common rgb: White - rgb(255,255,255), Black - rgb(0, 0, 0), Red - rgb(255, 0, 0), Green - ? Same Pattern - ff = 255
+- Color name: White Black Red Green Blue ..
+- Common Hex: `#ffffff #000000 #ff0000 #00ff00 #0000ff` ...See the pattern?
+- Common rgb: `rgb(255,255,255) rgb(0, 0, 0) rgb(255, 0, 0)` ...Same Pattern - ff = 255
 
-## CSS BOX MODEL
+### Outline
 
-It is essentially a box that wraps around every HTML element. It consists of: margins, borders, padding, and the actual content
--Unless Specified, Value is always a length(px, em, rem, etc) or %
+A line that is drawn around elements, outside the borders, to make the element "stand out"
+Shorthand - outline: outline-width outline-style outline-color. eg. `outline: 2px solid black`
+outline-width
+    Values: length(px, em,etc), medium, thin, thick
+outline-style
+    Values: none, hidden, dotted, dashed. solid, double ect
+outline-color
+    Value: color
+outline-offset
+    Adds space b/n an outline and the edge or border, value: px
 
-### CONTENT
+### List-style
 
-The content of the box, where text and images appear.
-    height & width
-        Specifies the height & width of content
-    max-height & max-width
-        Cannot be exceeded by height or width value
-    float
-        Positions elements to far left or right
-        - Values: left, right. Make sure the elements are the only 2 in
-        their div. Float one left & the other right
-    display
-        Specifies if/how an element is displayed
-        - Values: none, block, inline, inline-block
+Specifies the styling applied to a list of items, </li>
+Shorthand - list-style: list-style-type list-style-position list-style-image. eg. `list-style: square inside url("img.jpg")`
+list-style-type
+    Values: disc(default), square, circle, decimal, armanian, etc
+list-style-position
+    Values: outside(default), inside
+list-style-image
+    Value: image URL. eg. url(my-img.jpg)
+__Note__: Any missing list-style value will be replaced by the default
 
-### BORDER
+### Transform
 
-A border that goes around the padding and content, not visible until given a width
+Applies a 2D or 3D transformation to an element. allows you to translate, scale, rotate, skew
+Values can be an angle(deg), length(px,em,etc), percentage, decimal(unitless)
 
-- Value: border-width, border-style, border-color eg. border: 3px, solid, red; ( in that order)
-- BORDER STYLES: solid, dotted, dashed, double. 3D versions - groove, ridge, inset, outset. none, hidden
-Values can also be properties on their own. eg. border-style: 3px; border-top-color: 8px; border-right-style: solid;
-    border-top
-        Specifies only the top border
-        - Same values and same arrangement as border
-    border-right
-        Specifies only the right border
-        - Same values and same arrangement as border
-    border-bottom
-        Specifies only the bottom border
-        - Same values and same arrangement as border
-    border-left
-        Specifies only the left border
-        - Same values and same arrangement as border
+translate(x,y)
+    Defines a 2D translation
+translate3d(x,y,z)
+    Defines a 3D translation
+translateX(x),translateY(y),translateZ(z)
+    Defines a translation, using value for the X, Y or Z-axis
+scale(x,y)
+    Defines a 2D scale transformation
+scale3d(x,y,z)
+    Defines a 3D scale transformation
+scaleX(x),scaleY(y),scaleZ(z)
+    Defines a scale transfor mation by givin a val for X, Y or Z-axis
+rotate(angle)
+    Defines a 2D rotation along an angle(parameter)
+rotate3d(x,y,z,angle)
+    Defines a 3D rotation
+rotateX(angle),rotateY(angle),rotateZ(angle)
+    Defines a 3D rotation along the X, Y or Z-axis
+skew(x-angle,y-angle)
+    Defines a 2D skew transformation along the X & Y-axis
+skewX(x-angle),skewY(y-angle)
+    Defines a 2D skew transformation along the X or Y-axis
+perspective(n)
+    Defines a perspective view for a 3D transformed element
 
-### MARGIN
+#### Transform Properties
 
-Used to create space around elements, outside of any defined borders
+transform-style
+    allows changing the position of transformed elements
+transform-origin
+    Specifies how nested elements are rendered in 3D space
 
-- Value: margin-top, margin-right, margin-bottom, margin-left - eg. margin: 5px, 10px, 5px, 10px;
-    margin-top
-        Specifies only the top margin
-    margin-right
-        Specifies only the right margin
-    margin-bottom
-        Specifies only the bottom margin
-    margin-left
-        Specifies only the left margin
-    margin- shorthand
-        When only 2 vals are specifed. eg. margin: 5px 10px
-        1st val - margin-top & bottom. 2nd val - margin-right &lft
-    margin-shortest hand
-        When only 1 value is specifed. eg. margin: 5px
-        The value represent all margins
-
-### PADDING
-
-Used to generate space around an element's content, inside of any defined borders
-
-- Value: padding-top, padding-right, padding-bottom, padding-left - eg. padding: 5px, 10px, 5px, 10px;
-    padding-top
-        Specifies only the top padding
-    padding-right
-        Specifies only the right padding
-    padding-bottom
-        Specifies only the bottom padding
-    padding-left
-        Specifies only the left padding
-    padding - shorthand
-        When only 2 vals are specifed. eg padding: 5px 10px
-        1st val - padding-top & bottom. 2nd val - padding-right &lft
-    padding - shortest hand
-        When only 1 value is specifed. eg. padding: 5px
-        The value represent all paddings
-
-## COLUMN | ANIMATION | TRANSITION
-
-### COLUMN
+### Column
 
 column-count
     Spec no of columns an element should be divided into
@@ -261,333 +502,259 @@ columns
     Shorthand for column-width & column-count
     -Values: column-width, column-count, auto
 
-### ANIMATION
+### Animation
 
 An animation lets an element gradually change from one style to another.
+The animation is declared with `@Keyframes`, and the following properties are used to modify it's behavior:
 
-- The animation is declared with @Keyframes, and the following properties are used to modify it's behavior
-    animation
-        A shorthand 4 setting all animation properties
-        -Values: animation-name, -duration, -timimg-function, -delay, -iteration-count, -direction
-    animation-name
-        Specifies the name of the @keyframes animation
-        -Values: text
-    animation-duration
-        Spec time animation should take to complete 1 cycle
-    animation-timing-function
-        Specifies the speed curve of the animation
-        -Values: ease, linear, ease-in, ease-out, ease-in-out - Value: time. eg, 4s
-    animation-delay
-        Specifies a delay for the start of an animation
-        - Value: time. eg, 4s
-    animation-iteration-count
-        Specif no of times an animation shld b played
-        - Value: number
-    animation-direction
-        Specifies the direction of play of the animation
-        - Values: normal, reverse, alternate, alternate-reverse
-    animation-play-state
-        Spec whether animation is running or paused
-        - Values: paused, running
+animation
+    A shorthand 4 setting all animation properties
+    -Values: animation-name, -duration, -timimg-function, -delay, -iteration-count, -direction
+animation-name
+    Specifies the name of the @keyframes animation
+    -Values: text
+animation-duration
+    Spec time animation should take to complete 1 cycle
+animation-timing-function
+    Specifies the speed curve of the animation
+    -Values: ease, linear, ease-in, ease-out, ease-in-out - Value: time. eg, 4s
+animation-delay
+    Specifies a delay for the start of an animation
+    - Value: time. eg, 4s
+animation-iteration-count
+    Specif no of times an animation shld b played
+    - Value: number
+animation-direction
+    Specifies the direction of play of the animation
+    - Values: normal, reverse, alternate, alternate-reverse
+animation-play-state
+    Spec whether animation is running or paused
+    - Values: paused, running
 
-### TRANSITIONS
+### Transitions
 
 Allows you to change property values smoothly, over a given duration.
+To add transition, at least 2 things must be specified, the transition-property and transition-duration.
 
-- To add transition, at least 2 things must bet specified, the transition-property and transition-duration.
-    transition
-        A shorthand 4 setting all transition properties
-        -Val: transition-property, -duration, -timimg-function, -delay
-    transition-property
-        Spec name of CSS propaty the transition effect is for
-        - Value: CSS Property. eg. width, color
-    transition-duration
-        Spec time(millisec) it takes to complete transition
-        - Value: time. eg 4
-    transition-delay
-        Spec a delay (in sec) for the transition effect
-        - Value: time eg. 1
-    transition-timing function
-        Specifies the speed curve of the transition effect
-        - Values: ease, linear, ease-in, ease-out, ease-in-out
-    Transition vs Animation
-        Transition is a form of animation
-        - Except it works on only a start & end value, for more flexibility, use animation
+transition
+    A shorthand 4 setting all transition properties
+    -Val: transition-property, -duration, -timimg-function, -delay
+transition-property
+    Spec name of CSS propaty the transition effect is for
+    - Value: CSS Property. eg. width, color
+transition-duration
+    Spec time(millisec) it takes to complete transition
+    - Value: time. eg 4
+transition-delay
+    Spec a delay (in sec) for the transition effect
+    - Value: time eg. 1
+transition-timing function
+    Specifies the speed curve of the transition effect
+    - Values: ease, linear, ease-in, ease-out, ease-in-out
+Transition vs Animation
+    Transition is a form of animation
+    - Except it works on only a start & end value, for more flexibility, use animation
 
-## PSEUDO PROPERTIES | UNITS OF MEASUREMENTS
-
-### PSEUDO-ELEMENTS
-
-    ::firt-letter & ::first-line
-        Adds special styling to 1st letter & line of a text
-    ::before & ::after
-        Adds some content before & after an element
-
-### PSEUDO-CLASSES
-
-    :link & :visited
-        Styles an unvisited link & a visited link
-    :focus & :hover
-        An element when with focus & when u mouser over it
-    :enabled & :disabled
-        Styles an enabled element & a disabled element
-    :checked & :selection
-        A checked form element and a highlighted element
-    :first-child, :last-child & :only-child
-        Styles 1st child, last child & only child of an element
-    :nth-child(n) & :nth-last-child(n)
-        The nth child & the nth child counting from the end
-    :first-of-type, :last-of-type & :only-of-type
-        An element that is 1st, last or only type of its siblings
-    :nth-of-type(n) & :nth-last-of-type(n)
-        The nth sibling or nth counting from last of its siblings
-    :root
-        Styles an unvisited link & a visited link
-    :empty
-        An element when with focus & when u mouser over it
-    :active
-        Styles an activated element
-    :target
-        Styles the current active target element
-
-### ABSOLUTE UNITS
-
-Absolute measurement units do not change with changing browser window or device screen size
-
-- Not good for responsiveness. use only when you know what you are doing
-    Centimeter-cm  Millimeter-mm  Inch-in  Point-pt
-
-### RELATIVE UNITS
-
-Relative measurement units change with changing screen size, pixels, width, etc
-
-- Very good for responsivity. Preferred over absolute units
-    Percentage-%
-        Styles an unvisited link & a visited link
-    Pixel-px
-        An element when with focus & when u mouser over it
-    em
-        Relative to font size of the current element
-    Rootem-rem
-        Relative to font size of root element(mostly < html>)
-    vh & vw
-        Relative to the viewport height(vh) or width(vw)
-    vm
-        Relative to vh or vw, whichever is smaller
-
-### ANGLES
-
-    Degrees-deg  Radians-rad  Grads-grad  Turns-turn
-
-### FREQUENCY
-
-    Hertz-Hz  Kilo-Hertz-kHz
-
-### TIME
-
-    Seconds-s  Milli-seconds-ms
-
-## POSITION | OUTLINE | LIST | TRANSFORM
-
-### POSITION
-
-Specifies the type of positioning method used for an element
-Use properties - top, bottom, right, & left to specify the position after specifying the type of positioning
-    absolute
-        Relative to it's first positioned ancestor.
-    fixed
-        Relativ to browser window. Fixed to specified location
-    relative
-        Relative to the elements original position
-    sticky
-        Relative to a scroll position. first relative then become fixed
-
-### OUTLINE
-
-A line that is drawn around elements, outside the borders, to make the element "stand out"
-Shorthand - outline: outline-width outline-style outline-color. eg. outline: 2px solid black
-    outline-width
-        Values: length(px, em,etc), medium, thin, thick
-    outline-style
-        Values: none, hidden, dotted, dashed. solid, double ect
-    outline-color
-        Value: color
-    outline-offset
-        Adds space b/n an outline and the edge or border, value: px
-
-### LIST-STYLE
-
-Specifies the styling applied to a list of items, </li>
-Shorthand - list-style: list-style-type list-style-position list-style-image. eg. list-style: square inside url("img.jpg")
-    list-style-type
-        Values: disc(default), square, circle, decimal, armanian, etc
-    list-style-position
-        Values: outside(default), inside
-    list-style-image
-        Value: image URL. eg. url(my-img.jpg)
-    Note
-        Any missing list-style value will be replaced by the default
-
-### TRANSFORM
-
-Applies a 2D or 3D transformation to an element. allows you to translate, scale, rotate, skew
-Values can be an angle(deg), length(px,em,etc), percentage, decimal(unitless)
-    translate(x,y)
-        Defines a 2D translation
-    translate3d(x,y,z)
-        Defines a 3D translation
-    translateX(x),translateY(y),translateZ(z)
-        Defines a translation, using value for the X, Y or Z-axis
-    scale(x,y)
-        Defines a 2D scale transformation
-    scale3d(x,y,z)
-        Defines a 3D scale transformation
-    scaleX(x),scaleY(y),scaleZ(z)
-        Defines a scale transfor mation by givin a val for X, Y or Z-axis
-    rotate(angle)
-        Defines a 2D rotation along an angle(parameter)
-    rotate3d(x,y,z,angle)
-        Defines a 3D rotation
-    rotateX(angle),rotateY(angle),rotateZ(angle)
-        Defines a 3D rotation along the X, Y or Z-axis
-    skew(x-angle,y-angle)
-        Defines a 2D skew transformation along the X & Y-axis
-    skewX(x-angle),skewY(y-angle)
-        Defines a 2D skew transformation along the X or Y-axis
-    perspective(n)
-        Defines a perspective view for a 3D transformed element
-
-### TRANSFORM Properties
-
-    transform-style
-        allows changing the position of transformed elements
-    transform-origin
-        Specifies how nested elements are rendered in 3D space
-
-## SPEECH | CSS SELECTORS
-
-### SPEECH
+### Speech
 
 Essentially converts your document into speech and feeds it into screen reader for the user
+It is best for people with impaired vision or people with reading problems.
 
-- It is best for people with impaired vision or people with reading problems.
-    cue
-        Sets the cue properties in one declaration
-        -Values: cue-before, cue-after
-    cue-before & cue-after
-        Sound to play b4 & after speaking elemnt's contnt
-        -Values: none, url
-    elevation
-        Sets where the sound should come from
-        -Values: angle, below, level, above, higher, lower
-    pause
-        Sets the pause properties in one declaration
-        -Values: pause-before, pause-after
-    pause-before & pause-after
-        A pause b4 & after speaking an element's content
-        -Values: time, %
-    voice-family
-        Specifies the voice family of the speaking
-        -Values: male, female, child, other specifics
-    pitch
-        Specifies the speaking voice
-        -Values: frequency, x-low, low, medium, high, x-high
-    pitch-range
-        Specifies the variation in the speaking voice.
-        -Value: number
-    play-during
-        A sound to play while speaking an elemnt's content
-        -Values: auto, none, url, mix repeat
-    richness
-        Specifies the richness of the speaking voice.
-        -Values: number
-    speak
-        Specifies whether content will render aurally
-        -Values: normal, nonne, spell-out
-    speak-header
-        Specifies how to handle table headers
-        -Values: always, once
-    speak-numeral
-        Specifies how to speak numbers
-        -Values: digits, continuous
-    volume
-        Specifies the volume of the speaking
-        -Values: number, %, silent, soft, medium, loud
-    speech-rate
-        Specifies the speed of the speaking
-        -Values: number, slow, medium, fast, slower, etc
-    stress
-        Specifies the "stress" in the speaking voice
-        -Values: number
+cue
+    Sets the cue properties in one declaration
+    -Values: cue-before, cue-after
+cue-before & cue-after
+    Sound to play b4 & after speaking elemnt's contnt
+    -Values: none, url
+elevation
+    Sets where the sound should come from
+    -Values: angle, below, level, above, higher, lower
+pause
+    Sets the pause properties in one declaration
+    -Values: pause-before, pause-after
+pause-before & pause-after
+    A pause b4 & after speaking an element's content
+    -Values: time, %
+voice-family
+    Specifies the voice family of the speaking
+    -Values: male, female, child, other specifics
+pitch
+    Specifies the speaking voice
+    -Values: frequency, x-low, low, medium, high, x-high
+pitch-range
+    Specifies the variation in the speaking voice.
+    -Value: number
+play-during
+    A sound to play while speaking an elemnt's content
+    -Values: auto, none, url, mix repeat
+richness
+    Specifies the richness of the speaking voice.
+    -Values: number
+speak
+    Specifies whether content will render aurally
+    -Values: normal, nonne, spell-out
+speak-header
+    Specifies how to handle table headers
+    -Values: always, once
+speak-numeral
+    Specifies how to speak numbers
+    -Values: digits, continuous
+volume
+    Specifies the volume of the speaking
+    -Values: number, %, silent, soft, medium, loud
+speech-rate
+    Specifies the speed of the speaking
+    -Values: number, slow, medium, fast, slower, etc
+stress
+    Specifies the "stress" in the speaking voice
+    -Values: number
 
-### CSS SELECTORS
+## Layouts
 
-Used to "find" (or select) the HTML elements you want to style.
-categories of selectors: simple(name,id,class), combinator, Pseudo-classes, pseudo-elements, attribute
-    Universal - (*)
-        Selects all elements
-        eg.* {color: red;}
-    Name
-        Select using element name
-        eg. p {font-size: 18px;}
-    Class - (.)
-        Select single or multiple elements using their class
-        eg. .button {color: #ffffff}
-    id - (#)
-        Select a sinlge element using its unique id
-        eg #submit-button {disabled: true}
-    Attribute - []
-        Select an elemnt that has a particular attribute
-        -eg. a[target="_blank"] {color: #00ff00;}
-    Pseudo-class - :
-        To Style an element in a particular state.
-        -eg a:hover {background-color: 0000ff;}
-    Pseudo-element - ::
-        To style specified part of an element
-        -eg. p::first-line {color: ff0000}
-    Multiple Elements
-        to give multiple elements the same styling
-        -eg. h1, p, .button {font-size: 17px;}
-    Child - >
-        To style a direct child of an element
-        -eg. .caption > p {color: ff0000}
-    Descendant
-        To style a descendant, could be child or lower
-        -eg. .caption p {color: ff0000}
+Layouts: Floats Flexbox Grid
 
-## CSS GRID | FLEXBOX
+### Float
 
-### GRID
+Floats {outdated}
+    Takes the element out of HTML flow
+    float: left right center
+    clear: left right both (to remove float)
+
+### Flexbox
+
+The Flexible Box Layout Module, makes it easier to design flexible responsive layout structure
+
+Flexbox creates 1D row/column layout. (perfect for component layouts)
+main-axis
+cross-axis
+flex-container
+flex-items
+
+Flex container properties:
+
+- flex-direction
+- flex-wrap
+- flex-flow
+- justify-content
+- -align-items
+- align-content
+
+```css
+.parent{
+    display: flex
+    flex-direction: column row(default)  -  direction of elements(main-axis)
+
+    gap: 
+    flex-wrap: wrap nowrap(default) wrap-reverse  -  child elements can wrap them when screen size decreases (stops overflow)
+
+    justify-content: center flex-start/end space-around/between/evenly 
+    align-content: center flex-start/end baseline
+    justify-items: 
+    align-items: 
+}
+
+.child{
+    flex-grow: 1 (default=0)    - takes the extra space and distribute acc.
+    flex-shrink: 0 (default=1)  - takes the min-width to stop overflow
+    flex-basis : 0 (default=auto)   - change ratio acc. to content size ie. width
+    flex: 1;    (shorthand{flex-grow: 1; flex-shrink: 1; flex-basis: 0})
+    align-self: auto(default), stretch, center, baseline, flex-start/end
+    order: 0(default), -1(to front), 1(to last)
+}
+```
+
+display
+    Specifies the type of box used for an HTML element
+    Set value to "flex" to use flexbox
+flex-wrap
+    Specifies whether the flex items should wrap or not
+    - Values: nowrap, wrap, wrap-reverse
+flex-direction
+    Specifies direction of the items inside a flex container
+    Values: row, row-reverse, column, column-reverse
+justify-content
+    Horizontally aligns the flex items
+    Values: flex-start, flex-end, center, space-between, space-around
+flex-flow
+    Shorthand property for flex-direction and flex-wrap
+    - flex-flow: flex-direction flex-wrap
+align-content
+    Modifies behavior of the flex-wrap property
+    Values: stretch, center, flex-start, flex-end, space-between, etc
+align-items
+    Vertically aligns the flex items
+    Values: stretch, center, flex-start, flex-end, baseline
+order
+    Specif order of a flexible item relative to the rest
+    - Value: number. default = 0.
+
+### Grid
 
 Offers a grid-based layout system, with rows and columns, making it easier to design web pages
 
-- grid: grid-template-rows -template-columns -template-areas -auto-rows -auto-columns -auto-flow
-    grid-template-columns
-        Specifies no(& widths) of columns in a grid layout.
-        -Values: none, auto, max-content, min-content, length
-    grid-template-rows
-        Specifies no(& heights) of the rows in a grid layout.
-        -Values: none, auto, max-content, min-content, length
-    grid-auto-flow
-        Controls how auto-placed items get inserted in grid
-        -Values: row, column, dense, row dense
-    grid-template
-        Shorthand property for the grid template properties
-        -grid-template: grid-template-rows, -template-columns
-    grid-auto-rows
-        Sets a size for the rows in a grid container
-        -Values: auto, max-content, min-content, length
-    grid-auto-columns
-        Sets a size for the columns in a grid container
-        -Values: auto, max-content, min-content, length
-    grid-row
-        Shorthand property for the grid-row properties
-        - grid-row: grid-row-start grid-row-end
-    grid-column
-        Shorthand property for the grid-column properties
-        - grid-column: grid-column-start grid-column-end
+Grid creates 2d grid layout (good for page layouts)
+column-axis
+row-axis
+grid-container
+grid-items
 
-### GRID-AREA
+```css
+.parent{
+    display: grid
+
+    grid-template-columns: 1fr 1fr 1fr 1fr;     (four columns)
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr 1fr;    (two rows)
+
+    gap: 10px;   (previously grid-gap)
+    column-gap: 
+    row-gap: 
+
+    justify-items: stretch(default), start, center, end
+    align-items: 
+
+    (Use to align grid inside container (applies if container > grid)) :
+    justify-content: stretch(default), center, end
+    align-content: 
+}
+
+.child{
+    grid-column: 1 / 4
+    grid-row: 
+
+    justify-self: stretch(default), start, center, end
+    align-self: 
+}
+```
+
+- grid: grid-template-rows -template-columns -template-areas -auto-rows -auto-columns -auto-flow
+
+grid-template-columns
+    Specifies no(& widths) of columns in a grid layout.
+    -Values: none, auto, max-content, min-content, length
+grid-template-rows
+    Specifies no(& heights) of the rows in a grid layout.
+    -Values: none, auto, max-content, min-content, length
+grid-auto-flow
+    Controls how auto-placed items get inserted in grid
+    -Values: row, column, dense, row dense
+grid-template
+    Shorthand property for the grid template properties
+    -grid-template: grid-template-rows, -template-columns
+grid-auto-rows
+    Sets a size for the rows in a grid container
+    -Values: auto, max-content, min-content, length
+grid-auto-columns
+    Sets a size for the columns in a grid container
+    -Values: auto, max-content, min-content, length
+grid-row
+    Shorthand property for the grid-row properties
+    - grid-row: grid-row-start grid-row-end
+grid-column
+    Shorthand property for the grid-column properties
+    - grid-column: grid-column-start grid-column-end
+
+#### Grid-Area
 
 Specifies a grid item's size and location in a grid layout. Shorthand property for:
 
@@ -605,7 +772,7 @@ Specifies a grid item's size and location in a grid layout. Shorthand property f
         Specifies on which column-line to stop displaying item
         -Values: auto(default), span n, column-line
 
-### GRID-GAP
+#### Grid-Gap
 
 Defines the size of the gap between the rows and columns in a grid layout
 
@@ -617,35 +784,7 @@ Defines the size of the gap between the rows and columns in a grid layout
         Sets the size of the gap b/n columns in a grid layout
         -Values: length(px, etc), %. 0 is default
 
-### CSS FLEXBOX
-
-The Flexible Box Layout Module, makes it easier to design flexible responsive layout structure
--Flex container properties: flex-direction, flex-wrap, flex-flow, justify-content, -align-items, align-content
-    display
-        Specifies the type of box used for an HTML element
-        Set value to "flex" to use flexbox
-    flex-wrap
-        Specifies whether the flex items should wrap or not
-        - Values: nowrap, wrap, wrap-reverse
-    flex-direction
-        Specifies direction of the items inside a flex container
-        Values: row, row-reverse, column, column-reverse
-    justify-content
-        Horizontally aligns the flex items
-        Values: flex-start, flex-end, center, space-between, space-around
-    flex-flow
-        Shorthand property for flex-direction and flex-wrap
-        - flex-flow: flex-direction flex-wrap
-    align-content
-        Modifies behavior of the flex-wrap property
-        Values: stretch, center, flex-start, flex-end, space-between, etc
-    align-items
-        Vertically aligns the flex items
-        Values: stretch, center, flex-start, flex-end, baseline
-    order
-        Specif order of a flexible item relative to the rest
-        - Value: number. default = 0.
-<!-- ``` -->
+## style.css
 
 ```css
 

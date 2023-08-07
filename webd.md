@@ -4,21 +4,36 @@
 
 ### History
 
-www Tim-berners-lee
-Netscape-navigator Internet-explorer
+- www Tim-berners-lee
+- Netscape-navigator Internet-explorer
 
 ### Working
 
-Computers and Cables
-Browser Server
-Website Webpage
-DNS Domain IP-address Hosting
+- Computers and Cables
+- Browser Server
+- Internet
+- Protocols HTTP/HTTPS/..
+- Website Webpage
+- DNS Domain IP-address Hosting
+
+- Webpages - single document following markup language
+- Website - group of organized webpages
+- Static - unchangable Ex: Landing pages
+- Dynamic - changable (but less/ owner based) Ex: course site
+- WebApp - client based Ex: Social media
+- Progressive WebApp - installable as mobile app (offline work, notifications, lightweight, fast, )
+
+- Web1 - Text info
+- Web2 - Client-server based
+- Web3 - P2P based
 
 ## Frontend
 
 What we see in browsers
 
 HTML
+    Tags
+    Canvas
 CSS
     Selectors
     Layout: Box-model Flex Grid
@@ -26,6 +41,7 @@ CSS
     Sup: Sass Scss Less
 JS
     Basics ES6+
+    Array-methods LocalStorage
     TS
     Lib: jquery
     Frm: React Next Angular Vue
@@ -45,8 +61,8 @@ GraphQL
 
 ## DB
 
-SQL: MySQL PostgreSQL
-NoSQL: MongoDB DynamoDB
+- SQL: MySQL PostgreSQL
+- NoSQL: MongoDB DynamoDB
 
 ## Stack
 
